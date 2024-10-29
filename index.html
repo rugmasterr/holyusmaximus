@@ -1,0 +1,206 @@
+<html><head><base href="/">
+<style>
+  body {
+    background-color: #000;
+    color: #93a09e;
+    font-family: "Courier New", monospace;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+  }
+
+  .terminal {
+    position: relative;
+    z-index: 2;
+  }
+
+  .ascii-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .logo {
+    max-width: 300px;
+    margin: 20px auto;
+    display: block;
+    filter: brightness(0.8) sepia(1) hue-rotate(140deg);
+  }
+
+  .cursor {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .matrix-rain {
+    position: fixed;
+    color: #93a09e;
+    font-size: 20px;
+    font-family: monospace;
+    z-index: 0;
+  }
+
+  .social-buttons {
+    margin: 20px 0;
+  }
+
+  .btn {
+    background: #93a09e;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-family: "Courier New", monospace;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    background: #000;
+    color: #93a09e;
+    border: 1px solid #93a09e;
+  }
+
+  .ticker-art {
+    font-family: monospace;
+    white-space: pre;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 12px;
+  }
+
+  .about-box {
+    border: 1px solid #93a09e;
+    padding: 20px;
+    margin: 20px 0;
+    background: rgba(147, 160, 158, 0.1);
+  }
+
+  .matrix-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+
+<div class="matrix-container"></div>
+
+<div class="container terminal">
+  <img src="/a/91ebe502-42cf-40f6-8be2-a18235357f98" alt="ASCII art representation of a holy figure with outstretched arms in dotted pattern" class="logo">
+  
+  <div class="ticker-art">
+    ██   ██ ███    ███  █████  ██   ██ 
+    ██   ██ ████  ████ ██   ██  ██ ██  
+    ███████ ██ ████ ██ ███████   ███   
+    ██   ██ ██  ██  ██ ██   ██  ██ ██  
+    ██   ██ ██      ██ ██   ██ ██   ██ 
+  </div>
+
+  <h1>> HOLYUS MAXIMUS_<span class="cursor">|</span></h1>
+  <p>> INITIALIZING DIVINE PROTOCOL...</p>
+  <p>> LOADING BLOCKCHAIN BLESSINGS...</p>
+  <p>> WELCOME TO THE MOST BLESSED MEMECOIN IN EXISTENCE</p>
+  
+  <div class="about-box">
+    <p>> ABOUT HOLYUS MAXIMUS:</p>
+    <p>Holyus Maximus (HMAX) is not just another memecoin - it's a divine intervention in the crypto space. Born from the holy waters of the blockchain, HMAX brings blessings and prosperity to all holders. Our mission is to ascend beyond the mortal planes of traditional cryptocurrencies and achieve celestial gains.</p>
+  </div>
+
+  <div id="stats">
+    <p>> CURRENT BLESSING RATE: 777 BPS (Blessings Per Second)</p>
+    <p>> HOLY MARKET CAP: INFINITE POTENTIAL</p>
+    <p>> DIVINE TOKENOMICS LOADING...</p>
+  </div>
+
+  <div class="social-buttons">
+    <a href="https://twitter.com/holyusmaximus" target="_blank" class="btn">Twitter</a>
+    <a href="https://t.me/holyusmaximus" target="_blank" class="btn">Telegram</a>
+    <a href="https://pumpfun.io/holyusmaximus" target="_blank" class="btn">PumpFun</a>
+  </div>
+</div>
+
+<script>
+// Matrix rain effect
+function createMatrixRain() {
+  const chars = "01010101神聖最大";
+  const container = document.querySelector('.matrix-container');
+  
+  function createRainDrop() {
+    const drop = document.createElement('div');
+    drop.className = 'matrix-rain';
+    drop.style.left = Math.random() * window.innerWidth + 'px';
+    drop.style.top = -20 + 'px';
+    drop.style.opacity = Math.random() * 0.5 + 0.5;
+    
+    let speed = Math.random() * 15 + 5;
+    let position = -20;
+    
+    container.appendChild(drop);
+    
+    function animate() {
+      position += speed;
+      drop.style.top = position + 'px';
+      drop.textContent = chars[Math.floor(Math.random() * chars.length)];
+      
+      if (position > window.innerHeight) {
+        container.removeChild(drop);
+      } else {
+        requestAnimationFrame(animate);
+      }
+    }
+    
+    animate();
+  }
+  
+  setInterval(createRainDrop, 100);
+}
+
+// Start the matrix rain
+createMatrixRain();
+
+// Terminal typing effect
+function typeWriter(element, text, speed = 50) {
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
+
+// Randomly update "blessing rate" stats
+setInterval(() => {
+  const blessings = Math.floor(Math.random() * 1000) + 500;
+  document.querySelector('#stats p:first-child').innerHTML = 
+    `> CURRENT BLESSING RATE: ${blessings} BPS (Blessings Per Second)`;
+}, 3000);
+</script>
+
+</body></html>
